@@ -15,13 +15,9 @@ public class Move : MonoBehaviour
     public Sprite legZad;
     public Sprite legPered;
 
-
-    public float timeStart = 60;
-    public Text timeText;
-
     //контроль действий
     private bool isDestroyDetail;
-    private bool isActiveStep;
+    
     //контроль результатов
     public GameObject Again; //панель снова изза детали
     public GameObject AgainStep; //панель снова изза шагов
@@ -84,8 +80,9 @@ public class Move : MonoBehaviour
 
         }
         okeyButton.interactable = false; //делаем кнопку недоступной
-        Debug.Log(_speedOfMove + "Время для шагов");
-        Invoke("checkDetail", _speedOfMove + 2); //итоговый вызов проверки деталей и шагов
+        Debug.Log(_speedOfMove + " Время для шагов");
+        _speedOfMove += 3;
+        Invoke("checkDetail", _speedOfMove); //итоговый вызов проверки деталей и шагов
         
     }
 
@@ -241,12 +238,15 @@ public class Move : MonoBehaviour
 
         Debug.Log("корутина right down  началась");
         anim.Play("RightDown");
+
         Vector3 end = new Vector3();
         end.x = player.transform.position.x + margin.x;
         end.y = player.transform.position.y -margin.y;
         end.z = margin.z;
+
         float totalMovementTime = 25f; //время для передвижения
         float currentMovementTime = 0f;//время которое прошло
+
         while (Vector3.Distance(player.transform.localPosition, end) > 0)
         {
             currentMovementTime += Time.deltaTime;

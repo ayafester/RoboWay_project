@@ -1,8 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public class Slots //класс слот
+    {
+        public Transform slot;
+        public bool isActive;
+        public DropItem script;
+
+    };
+
+    public GameObject _slot; //слот родитель
+    private List<Slots> slotsList = new List<Slots>(); //массив с экземлпярами слотов
+
+
+
+
     public Canvas canvas;
     public static DragItem dragItem; //текущий элемент, который взяли
     public static DragItem dragItemCopy; //копия текущего элемента
@@ -21,15 +38,75 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void Start()
     {
+        
+        for (int i = 0; i < _slot.transform.childCount; i++)
+        {
+            slotsList.Add( new Slots() ); //13 экземпляров
+        }
+        for (int i = 0; i < _slot.transform.childCount; i++)
+        {
+            slotsList[i].slot = _slot.transform.GetChild(i); //инициализирован слот из юнити
+            slotsList[i].isActive = false;
+            slotsList[i].script = slotsList[i].slot.GetComponent<DropItem>();
+            slotsList[i].script.enabled = false;
+        }
+        slotsList[0].script.enabled = true;
+
+
         recttrans = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>(); //получаем компонент канвас группы для тек.элемента
         dragLayer = GameObject.FindGameObjectWithTag("DragLayer").GetComponent<RectTransform>();//находим по тегу
         currentSlot = transform.parent;//присвиваем текущему слоту родителя
 
     }
+    private void Update()
+    {
+        if(slotsList[0].slot.childCount == 1)
+        {
+            slotsList[0].slot.GetComponent<RectTransform>().localScale = new Vector3(1.1f, 1.1f, 1f);
+            for (int i = 1; i < 13; i++)
+            {
+                slotsList[i].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+            }
+        }
+        
 
+        for (int i = 0; i < 13; i++)
+        {
+            if (slotsList[i].slot.childCount == 2)
+            {
+                //slotsList[i].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                //slotsList[i+1].slot.GetComponent<RectTransform>().localScale = new Vector3(1.1f, 1.1f, 1f);
+                for (int m = 0; m < 13; m++)
+                {
+                    slotsList[m].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                }
+
+                slotsList[i+1].script.enabled = true;
+                slotsList[i + 1].slot.GetComponent<RectTransform>().localScale = new Vector3(1.1f, 1.1f, 1f);
+
+            }
+            else
+            {
+                for (int k = i; k < 13; k++)
+                {
+                    //slotsList[k].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                    if (slotsList[k].slot.childCount > 1 )
+                    {
+                        Destroy(slotsList[k].slot.GetChild(1).gameObject);
+                        slotsList[k].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                        
+                    }
+                    
+
+                }
+            }
+        }
+
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        
         //Debug.Log(currentSlot);
         slot = null; //обнуляем слот элемента
         dragItem = this; //присваиваем тек. элемент
