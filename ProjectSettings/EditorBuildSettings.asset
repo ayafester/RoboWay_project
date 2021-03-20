@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/PersonChange.unity
+    guid: 7389131b913f41c49abd9c3dd5219a22
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: 081dd7e111a83494b8729793fd09af3d
+  - enabled: 1
+    path: Assets/Scenes/Blocks.unity
+    guid: 4dbe52ccc1e003f499c71f47fca6db93
+  - enabled: 1
+    path: Assets/Scenes/Level 1-10/Levels1-10.unity
+    guid: bc48a775d717ef948a32593fbecc34a7
+  - enabled: 1
+    path: Assets/Scenes/Level 1-10/Level1.unity
+    guid: 96dcde15f71c2f14cb32a5fc6f24c714
+  - enabled: 1
+    path: Assets/Scenes/Result.unity
+    guid: 11bedad4671eaf14287b729b22d48a4f
+  m_configObjects: {}
