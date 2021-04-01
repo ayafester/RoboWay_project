@@ -10,6 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
+    public int level;
+    public GameObject unk;
+
     public Sprite zad; //спрайты для анимации
     public Sprite pered;
     public Sprite legZad;
@@ -20,11 +23,7 @@ public class Move : MonoBehaviour
     
     //контроль результатов
     public GameObject Again; //панель снова изза детали
-    public GameObject AgainStep; //панель снова изза шагов
     public GameObject ResultPanel;//панель с результатами
-
-    private Vector3 startPos;
-    
 
     private float speed = 1; //скорость движения
     private float _speedOfMove = 1f;//скорость вызова функций для инвока
@@ -37,15 +36,21 @@ public class Move : MonoBehaviour
     public List<Transform> slotsList;//массив слотов
     private int slotsCount;//количество слотов
 
+    public GameObject ifSlots;
+    public List<Transform> ifSlotsList;//массив слотов
+
+    private Vector3 startPos;
+
     public Button okeyButton;//кнопка ок
-    private float counter; //сколько сделал шагов персонаж, чтобы вывести в результат
-    private float counterCommand;//сколько сделал комманд
+    public float counter; //сколько сделал шагов персонаж, чтобы вывести в результат
+   
+    public float counterCommand;//сколько сделал комманд
 
     private Rigidbody2D rb; //компоненты персонажа
     private Animation anim;
 
 
-    void Start()
+    private void Start()
     {
         
         rb = player.GetComponent<Rigidbody2D>();
@@ -64,99 +69,121 @@ public class Move : MonoBehaviour
         {
             slotsList.Add(slots.transform.GetChild(i)); //инициализация слотов
         }
-        
+        for (int k = 0; k < ifSlots.transform.childCount; k++)
+        {
+            ifSlotsList.Add(ifSlots.transform.GetChild(k)); //инициализация слотов
+        }
+
         Button btn = okeyButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);//присваиваем вызов по кнопке
     }
-    
+   
     private void TaskOnClick() //кнопка поехали
     {
         
-        for (int i=0; i<13; i++)//проходим по массиву слотов
+        for (int i=0; i<14; i++)//проходим по массиву слотов
         {
-           
-           StartCoroutine(Step(i, _speedOfMove));//вызываем шаг со скоростью 
-           // _speedOfMove += 5;
-
+           StartCoroutine(Step(slotsList, i, _speedOfMove));//вызываем шаг со скоростью 
         }
         okeyButton.interactable = false; //делаем кнопку недоступной
-        Debug.Log(_speedOfMove + " Время для шагов");
-        _speedOfMove += 3;
+        _speedOfMove += 1;
         Invoke("checkDetail", _speedOfMove); //итоговый вызов проверки деталей и шагов
-        
+        Collider.isCollision = false;
+        ChangeConditionToBlock.isContact = false;
     }
 
     private void checkDetail()
     {
         StopAllCoroutines();
 
-        if (isDestroyDetail == false)
+        if (level == 1)
         {
-            Debug.Log("ВЫ не взяли деталь в чекдетайль");
-            Again.SetActive(true);
+            if (OpenDoor.isDoorOpen == true)
+            {
+                Result();
+            } else
+            {
+                Again.SetActive(true);
+            }
+        } else
+        {
+            if (isDestroyDetail == false)
+            {
+                Debug.Log("ВЫ не взяли деталь в чекдетайль");
+                Again.SetActive(true);
+            }
         }
+        
     }
     
-     IEnumerator Step(int num, float speed) //один шаг в одном слоте 
+     IEnumerator Step(List<Transform> list, int num, float speed) //один шаг в одном слоте 
     {
-        
-        if (slotsList[num].childCount > 1)//если в слоте больше одного ребенка, то (значит там есть действие)
+        if (list[num].childCount > 1)//если в слоте больше одного ребенка, то (значит там есть действие)
         {
             _speedOfMove += 2;
-
-
-            if (slotsList[num].GetChild(1).tag == "LeftDown") //если тег налево, то вызов функции шаг налево
+            if (list[num].GetChild(1).tag == "LeftDown") //если тег налево, то вызов функции шаг налево
             {
 
                 Debug.Log("Если влево вниз! Корутина должна начаться через секунд " + speed);
-                
+
                 yield return new WaitForSeconds(speed);
-                
-                
+
+
                 StartCoroutine(moveObjectLeftDown());
-                
+
                 counter++;
             }
-            else if (slotsList[num].GetChild(1).tag == "LeftUp")
+            else if (list[num].GetChild(1).tag == "LeftUp")
             {
-               
+
                 Debug.Log("Если вправо вверх! Корутина должна начаться через секунд " + speed);
                 yield return new WaitForSeconds(speed);
-                
-                
+
+
                 StartCoroutine(moveObjectLeftUp());
 
-                
+
                 counter++;
             }
-            else if (slotsList[num].GetChild(1).tag == "RightUp")
+            else if (list[num].GetChild(1).tag == "RightUp")
             {
-                
+
                 yield return new WaitForSeconds(speed);
                 Debug.Log("Если вправо вверх! Корутина должна начаться через секунд " + speed);
                 StartCoroutine(moveObjectRightUp());
 
-                
+
                 counter++;
             }
-            else if (slotsList[num].GetChild(1).tag == "RightDown")
+            else if (list[num].GetChild(1).tag == "RightDown")
             {
-               
+
                 yield return new WaitForSeconds(speed);
                 Debug.Log("Если вправо вниз! Корутина должна начаться через секунд " + speed);
                 StartCoroutine(moveObjectRightDown());
 
-                
-                counter++;
-            }
-            else if (slotsList[num].GetChild(1).tag == "take")
-            {
-                
-                yield return new WaitForSeconds(speed);
-                
-                Take();
 
                 counter++;
+            }
+            else if (list[num].GetChild(1).tag == "take")
+            {
+
+                yield return new WaitForSeconds(speed);
+
+                Take();
+
+            } else if (list[num].GetChild(1).tag == "if")
+            {
+                if(ifSlotsList[2].transform.GetChild(0).transform.tag == unk.tag)
+                {
+                    for (int i = 3; i < ifSlotsList.Count; i++)
+                    {
+                        StartCoroutine(Step(ifSlotsList, i, _speedOfMove));
+                        //_speedOfMove += 2;
+                    }
+                    
+                }
+               
             }
 
         }
@@ -169,25 +196,28 @@ public class Move : MonoBehaviour
             Debug.Log("деталь уничтожена ");
             Destroy(det);
             isDestroyDetail = true;
-
-            ResultPanel.SetActive(true); //вызываем панель итога
-
-            for (int i = 0; i < slotsCount; i++)
-            {
-                if (slotsList[i].childCount == 2)
-                {
-                    counterCommand++; //считаем количество команд
-                }
-            }
-            Text textStep = GameObject.Find("NumberSteps").GetComponent<Text>(); //передаем ей компоненты
-            textStep.text = counter.ToString();
-
-            Text textCommand = GameObject.Find("NumberCommand").GetComponent<Text>();
-            textCommand.text = counterCommand.ToString();
+            StopAllCoroutines();
+            Result();
             
+        } 
+    }
+
+    void Result()
+    {
+        ResultPanel.SetActive(true); //вызываем панель итога
+
+        for (int i = 0; i < slotsCount; i++)
+        {
+            if (slotsList[i].childCount == 2)
+            {
+                counterCommand++; //считаем количество команд
+            }
         }
-        
-        
+        Text textStep = GameObject.Find("NumberSteps").GetComponent<Text>(); //передаем ей компоненты
+        textStep.text = counter.ToString();
+
+        Text textCommand = GameObject.Find("NumberCommand").GetComponent<Text>();
+        textCommand.text = counterCommand.ToString();
     }
 
    
@@ -250,6 +280,13 @@ public class Move : MonoBehaviour
         while (Vector3.Distance(player.transform.localPosition, end) > 0)
         {
             currentMovementTime += Time.deltaTime;
+            if(Collider.isCollision == true)
+            {
+                break;
+            } else if (ChangeConditionToBlock.isContact == true)
+            {
+                break;
+            }
             rb.position = Vector3.Lerp(player.transform.position, end, currentMovementTime / totalMovementTime);
             yield return null;
         }
@@ -286,6 +323,14 @@ public class Move : MonoBehaviour
         while (Vector3.Distance(player.transform.localPosition, end) > 0)
         {
             currentMovementTime += Time.deltaTime;
+            if (Collider.isCollision == true)
+            {
+                break;
+            }
+            if (ChangeConditionToBlock.isContact == true)
+            {
+                break;
+            }
             rb.position = Vector3.Lerp(player.transform.position, end, currentMovementTime / totalMovementTime);
             yield return null;
         }
@@ -325,6 +370,14 @@ public class Move : MonoBehaviour
         {
             currentMovementTime += Time.deltaTime;
             rb.position = Vector3.Lerp(player.transform.position, end, currentMovementTime / totalMovementTime);
+            if (Collider.isCollision == true)
+            {
+                break;
+            }
+            if (ChangeConditionToBlock.isContact == true)
+            {
+                break;
+            }
             yield return null;
         }
     }
@@ -360,6 +413,14 @@ public class Move : MonoBehaviour
         while (Vector3.Distance(player.transform.localPosition, end) > 0)
         {
             currentMovementTime += Time.deltaTime;
+            if (Collider.isCollision == true)
+            {
+                break;
+            }
+            if (ChangeConditionToBlock.isContact == true)
+            {
+                break;
+            }
             rb.position = Vector3.Lerp(player.transform.position, end, currentMovementTime / totalMovementTime);
             yield return null;
         }

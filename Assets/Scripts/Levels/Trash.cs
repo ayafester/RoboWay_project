@@ -19,7 +19,7 @@ public class Trash : MonoBehaviour, IDropHandler
         
         var item = DragItem.dragItem;
         Destroy(item.gameObject);
-        //Debug.Log(item);
+        
     }
 
     

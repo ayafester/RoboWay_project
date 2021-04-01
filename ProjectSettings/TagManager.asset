@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - DragLayer
-  - 2
   - 3
   - 4
   - 5
@@ -33,6 +32,11 @@ TagManager:
   - RightUp
   - LeftDown
   - LeftUp
+  - WallWood
+  - Pole
+  - WallStone
+  - AddSlot
+  - if1
   layers:
   - Default
   - TransparentFX

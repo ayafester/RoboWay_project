@@ -5,14 +5,14 @@ using UnityEngine;
 public class OnCollisionDetail : MonoBehaviour
 {
     public static bool isContact = false;
-    void OnCollisionEnter2D(Collision2D collision)
+   
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "player")
         {
             Debug.Log("Персонаж в моей территори");
             isContact = true;
-            
+
         }
     }
-    
 }
