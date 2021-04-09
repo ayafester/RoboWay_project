@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class DropItem : MonoBehaviour, IDropHandler
 {
     public GameObject IfSlots;
+    //public GameObject IfSlotsController;
+
     DragItem item;
     public GameObject Slot;
    
@@ -31,9 +33,7 @@ public class DropItem : MonoBehaviour, IDropHandler
         {
             slotsList.Add(Slot.transform.GetChild(i));
         }
-        //Debug.Log(slotsList);
-
-        Debug.Log("работает ондроп!");
+        
         item = DragItem.dragItem;
         childCount = thisSlot.transform.childCount; //получаем количество детей у объекта
         
@@ -49,10 +49,17 @@ public class DropItem : MonoBehaviour, IDropHandler
                         {
                             item.SetItemToSlot(transform);
                             SetColor();
-                        } else
+
+                        } else if (item.tag == "func") {
+
+                            item.SetItemToSlot(transform);
+                            SetColor();
+                        }
+                        else
                         {
                             item.SetItemToSlot(transform);
                         }
+
                    } else if (thisSlot.transform.childCount == 2)
                    {
                         Destroy(thisSlot.transform.GetChild(1).gameObject); //заменяем обьект на новый
@@ -60,10 +67,18 @@ public class DropItem : MonoBehaviour, IDropHandler
                         {
                             DeleteColor(); 
                         }
+                        if (thisSlot.transform.GetChild(1).gameObject.tag == "func")
+                        {
+                            DeleteColor();
+                        }
                         item.SetItemToSlot(transform);
                         if(item.tag == "if")
                         {
                             SetColor();
+                        } else if(item.tag == "func")
+                        {
+                            SetColor();
+
                         }
                     }
                 } 
@@ -95,17 +110,23 @@ public class DropItem : MonoBehaviour, IDropHandler
     private void SetColor()
     {
         IfSlots.GetComponent<CanvasGroup>().alpha = 1f;
+        //IfSlotsController.SetActive(true);
         for (int i = 2; i < IfSlots.transform.childCount; i++)
         {
-            Debug.Log("aiaia");
             IfSlots.transform.GetChild(i).GetComponent<DropItem>().enabled = true;
         }
         
     }
 
-    private void DeleteColor()
+    public void DeleteColor()
     {
         IfSlots.GetComponent<CanvasGroup>().alpha = 0.4f;
+
+       // IfSlotsController.SetActive(false);
+        if(IfSlots.transform.GetChild(2).childCount == 1)
+        {
+            Destroy(IfSlots.transform.GetChild(2).transform.GetChild(0).gameObject);
+        }
         for (int i = 0; i < IfSlots.transform.childCount; i++)
         {
             if(IfSlots.transform.GetChild(i).childCount == 2)

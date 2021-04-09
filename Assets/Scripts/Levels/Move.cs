@@ -10,7 +10,12 @@ using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
+    public int block;
     public int level;
+    public int bestCommand;
+
+    private string levelName;
+
     public GameObject unk;
 
     public Sprite zad; //спрайты для анимации
@@ -25,7 +30,7 @@ public class Move : MonoBehaviour
     public GameObject Again; //панель снова изза детали
     public GameObject ResultPanel;//панель с результатами
 
-    private float speed = 1; //скорость движения
+    //private float speed = 1; //скорость движения
     private float _speedOfMove = 1f;//скорость вызова функций для инвока
     private Vector3 margin;//расстояние прохождения
 
@@ -42,9 +47,9 @@ public class Move : MonoBehaviour
     private Vector3 startPos;
 
     public Button okeyButton;//кнопка ок
-    public float counter; //сколько сделал шагов персонаж, чтобы вывести в результат
+    public int counter; //сколько сделал шагов персонаж, чтобы вывести в результат
    
-    public float counterCommand;//сколько сделал комманд
+    public int counterCommand;//сколько сделал комманд
 
     private Rigidbody2D rb; //компоненты персонажа
     private Animation anim;
@@ -52,7 +57,11 @@ public class Move : MonoBehaviour
 
     private void Start()
     {
-        
+        levelName = block.ToString() + level.ToString();
+        if(PlayerPrefs.GetInt("LevelName" + levelName) == 0)
+        {
+            PlayerPrefs.SetInt("LevelName" + levelName, 0);
+        } 
         rb = player.GetComponent<Rigidbody2D>();
         anim = player.GetComponent<Animation>();
 
@@ -88,13 +97,17 @@ public class Move : MonoBehaviour
         okeyButton.interactable = false; //делаем кнопку недоступной
         _speedOfMove += 1;
         Invoke("checkDetail", _speedOfMove); //итоговый вызов проверки деталей и шагов
+
         Collider.isCollision = false;
         ChangeConditionToBlock.isContact = false;
+        OpenDoor.isDoorOpen = false;
+        isDestroyDetail = false;
     }
 
     private void checkDetail()
     {
         StopAllCoroutines();
+        CancelInvoke();
 
         if (level == 1)
         {
@@ -109,7 +122,6 @@ public class Move : MonoBehaviour
         {
             if (isDestroyDetail == false)
             {
-                Debug.Log("ВЫ не взяли деталь в чекдетайль");
                 Again.SetActive(true);
             }
         }
@@ -123,82 +135,93 @@ public class Move : MonoBehaviour
             _speedOfMove += 2;
             if (list[num].GetChild(1).tag == "LeftDown") //если тег налево, то вызов функции шаг налево
             {
-
-                Debug.Log("Если влево вниз! Корутина должна начаться через секунд " + speed);
-
                 yield return new WaitForSeconds(speed);
-
-
                 StartCoroutine(moveObjectLeftDown());
-
                 counter++;
             }
             else if (list[num].GetChild(1).tag == "LeftUp")
             {
-
-                Debug.Log("Если вправо вверх! Корутина должна начаться через секунд " + speed);
                 yield return new WaitForSeconds(speed);
-
-
                 StartCoroutine(moveObjectLeftUp());
-
-
                 counter++;
             }
             else if (list[num].GetChild(1).tag == "RightUp")
             {
-
+                
                 yield return new WaitForSeconds(speed);
-                Debug.Log("Если вправо вверх! Корутина должна начаться через секунд " + speed);
                 StartCoroutine(moveObjectRightUp());
-
-
                 counter++;
             }
             else if (list[num].GetChild(1).tag == "RightDown")
             {
-
+                
                 yield return new WaitForSeconds(speed);
-                Debug.Log("Если вправо вниз! Корутина должна начаться через секунд " + speed);
                 StartCoroutine(moveObjectRightDown());
-
-
                 counter++;
             }
             else if (list[num].GetChild(1).tag == "take")
             {
 
                 yield return new WaitForSeconds(speed);
-
                 Take();
 
             } else if (list[num].GetChild(1).tag == "if")
             {
-                if(ifSlotsList[2].transform.GetChild(0).transform.tag == unk.tag)
+                Debug.Log("if");
+                Debug.Log(ifSlotsList[2].transform.childCount);
+
+                if (ifSlotsList[2].transform.childCount > 0) //если слот условия не пустой
                 {
-                    for (int i = 3; i < ifSlotsList.Count; i++)
+                    Debug.Log(ChangeConditionToBlock.isContact + " contact");
+                    Debug.Log(ChangeConditionToBlock.isIf + " isif");
+
+                    if (ifSlotsList[2].transform.GetChild(0).transform.tag == unk.tag && ChangeConditionToBlock.isIf == true) //если совпадают тэги в условии и тег стены
                     {
-                        StartCoroutine(Step(ifSlotsList, i, _speedOfMove));
-                        //_speedOfMove += 2;
+                        for (int i = 3; i < ifSlotsList.Count; i++)
+                        {
+                            StartCoroutine(Step(ifSlotsList, i, _speedOfMove));
+
+                        }
+
                     }
-                    
                 }
+                
                
+            } else if(list[num].GetChild(1).tag == "func")
+            {
+
             }
 
         }
        
     }
+
+    /*void If()
+    {
+        Debug.Log(ChangeConditionToBlock.isContact + " contact");
+        Debug.Log(ChangeConditionToBlock.isIf + " isif");
+
+        if (ifSlotsList[2].transform.GetChild(0).transform.tag == unk.tag && ChangeConditionToBlock.isIf == true) //если совпадают тэги в условии и тег стены
+        {
+            for (int i = 3; i < ifSlotsList.Count; i++)
+            {
+                StartCoroutine(Step(ifSlotsList, i, _speedOfMove));
+                Debug.Log(ChangeConditionToBlock.isIf + " когда поменялся слот");
+
+            }
+
+        }
+    }*/
+
     void Take()
     {
         if (OnCollisionDetail.isContact == true)
         {
-            Debug.Log("деталь уничтожена ");
             Destroy(det);
             isDestroyDetail = true;
+
             StopAllCoroutines();
             Result();
-            
         } 
     }
 
@@ -213,46 +236,20 @@ public class Move : MonoBehaviour
                 counterCommand++; //считаем количество команд
             }
         }
-        Text textStep = GameObject.Find("NumberSteps").GetComponent<Text>(); //передаем ей компоненты
-        textStep.text = counter.ToString();
-
+        
         Text textCommand = GameObject.Find("NumberCommand").GetComponent<Text>();
         textCommand.text = counterCommand.ToString();
+
+        PlayerPrefs.SetInt("LevelName" + levelName, 1);
+        PlayerPrefs.SetInt("BestCommand" + levelName, bestCommand);
+        PlayerPrefs.SetInt("CounterCommand" + levelName, counterCommand);
     }
 
    
-    /*private void MoveDownLeft()
-    {
-        //timeStart = 240;
-
-        for (int i = 0; i <timeStart ; i++)
-        {
-            Debug.Log("step");
-            rb.position = Vector3.Lerp(startPosito, endPOs, progress);
-            progress += step;
-        }
-
-    }
-
-    IEnumerator ExecuteAfterTime(float timeInSec)
-    {
-        yield return new WaitForSeconds(timeInSec);
-        Debug.Log("эта корутина началась через " + timeInSec);
-
-        timeStart = 600;
-        for (int i = 0; i < timeStart; i++)
-        {
-            Debug.Log("step");
-            rb.position = Vector3.Lerp(startPosito, endPOs, progress);
-            progress += step;
-        }
-        //сделать нужное
-    }*/
-
-
     //корутина для плавного движения
     public IEnumerator moveObjectRightDown()
     {
+        
         var body = player.transform.GetChild(0).gameObject;
         body.GetComponent<SpriteRenderer>().sprite = pered;
 
@@ -266,7 +263,7 @@ public class Move : MonoBehaviour
 
         var arm = player.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
 
-        Debug.Log("корутина right down  началась");
+        
         anim.Play("RightDown");
 
         Vector3 end = new Vector3();
@@ -282,9 +279,14 @@ public class Move : MonoBehaviour
             currentMovementTime += Time.deltaTime;
             if(Collider.isCollision == true)
             {
+                Debug.Log(" Прекращаем движение, когда стена стала тру");
+                checkDetail();
                 break;
-            } else if (ChangeConditionToBlock.isContact == true)
+            } else if (ChangeConditionToBlock.isContact == true) //чтобы при упирании к стенке, персонаж не дергался
             {
+                Debug.Log(" Прекращаем движение, когда стенка стала тру");
+                checkDetail();
+
                 break;
             }
             rb.position = Vector3.Lerp(player.transform.position, end, currentMovementTime / totalMovementTime);
@@ -293,6 +295,7 @@ public class Move : MonoBehaviour
     }
     public IEnumerator moveObjectRightUp()
     {
+        
         var body = player.transform.GetChild(0).gameObject;
         body.GetComponent<SpriteRenderer>().sprite = zad;
         body.transform.localScale = new Vector3(-1.7f, 1.8f, 1f);
@@ -313,7 +316,7 @@ public class Move : MonoBehaviour
 
         anim.Play("RightUp");
         
-        Debug.Log("корутина right up началась");
+       
         Vector3 end = new Vector3();
         end.x = player.transform.position.x + margin.x;
         end.y = player.transform.position.y + margin.y;
@@ -325,10 +328,13 @@ public class Move : MonoBehaviour
             currentMovementTime += Time.deltaTime;
             if (Collider.isCollision == true)
             {
+                checkDetail();
                 break;
             }
             if (ChangeConditionToBlock.isContact == true)
             {
+                Debug.Log(" Прекращаем движение, когда стенка стала тру");
+                checkDetail();
                 break;
             }
             rb.position = Vector3.Lerp(player.transform.position, end, currentMovementTime / totalMovementTime);
@@ -337,6 +343,7 @@ public class Move : MonoBehaviour
     }
     public IEnumerator moveObjectLeftDown()
     {
+        
         var body = player.transform.GetChild(0).gameObject;
         body.GetComponent<SpriteRenderer>().sprite = pered;
         body.transform.localScale = new Vector3(1.7f, 1.8f, 1f);
@@ -359,7 +366,7 @@ public class Move : MonoBehaviour
         var sprite = player.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = pered;
         var sprite2 = player.transform.GetChild(3).gameObject.GetComponent<SpriteRenderer>().sprite = legPered;
         var sprite3 = player.transform.GetChild(4).gameObject.GetComponent<SpriteRenderer>().sprite = legPered;
-        Debug.Log("корутина left down  началась");
+        
         Vector3 end = new Vector3();
         end.x = player.transform.position.x - margin.x;
         end.y = player.transform.position.y - margin.y;
@@ -372,10 +379,13 @@ public class Move : MonoBehaviour
             rb.position = Vector3.Lerp(player.transform.position, end, currentMovementTime / totalMovementTime);
             if (Collider.isCollision == true)
             {
+                checkDetail();
                 break;
             }
             if (ChangeConditionToBlock.isContact == true)
             {
+                Debug.Log(" Прекращаем движение, когда стенка стала тру");
+                checkDetail();
                 break;
             }
             yield return null;
@@ -384,6 +394,7 @@ public class Move : MonoBehaviour
 
     public IEnumerator moveObjectLeftUp()
     {
+        
         var body = player.transform.GetChild(0).gameObject;
         body.GetComponent<SpriteRenderer>().sprite = zad;
         body.transform.localScale = new Vector3(1.7f, 1.8f, 1f);
@@ -403,7 +414,7 @@ public class Move : MonoBehaviour
         arm2.GetComponent<SpriteRenderer>().sortingOrder = 2;
         
         anim.Play("LeftUp");
-        Debug.Log("корутина left up началась");
+        
         Vector3 end = new Vector3();
         end.x = player.transform.position.x - margin.x;
         end.y = player.transform.position.y + margin.y;
@@ -415,31 +426,18 @@ public class Move : MonoBehaviour
             currentMovementTime += Time.deltaTime;
             if (Collider.isCollision == true)
             {
+                checkDetail();
                 break;
             }
             if (ChangeConditionToBlock.isContact == true)
             {
+                Debug.Log(" Прекращаем движение, когда стенка стала тру");
+                checkDetail();
                 break;
             }
             rb.position = Vector3.Lerp(player.transform.position, end, currentMovementTime / totalMovementTime);
             yield return null;
         }
     }
-
-    
-
-    /*void MoveObjUpRight()
-    {
-        
-        
-        Vector3 pointEnd = new Vector3();
-        pointEnd.x = player.transform.position.x + margin.x;
-        pointEnd.y = player.transform.position.y - margin.y;
-        
-        Vector3 dat = new Vector3(pointEnd.x, pointEnd.y, margin.z);
-
-        player.transform.position = Vector3.MoveTowards(player.transform.position, dat, speed);
-
-    }*/
 
 }

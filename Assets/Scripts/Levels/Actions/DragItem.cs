@@ -34,7 +34,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("работает он бегин драг!");
+       
         slot = null; //обнуляем слот элемента
         dragItem = this; //присваиваем тек. элемент
 
@@ -66,7 +66,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("работает он энд драг!");
+        
         if (slot == null) //если не переместили в новый слот
         {
             transform.SetParent(startParrent); //то присваиваем стартовую позицию и параметры

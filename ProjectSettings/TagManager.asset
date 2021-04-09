@@ -77,9 +77,12 @@ TagManager:
   - name: Player
     uniqueID: 1438922649
     locked: 0
-  - name: Canva
-    uniqueID: 2179571993
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Collision
+    uniqueID: 2337129133
+    locked: 0
+  - name: Canva
+    uniqueID: 2179571993
     locked: 0
