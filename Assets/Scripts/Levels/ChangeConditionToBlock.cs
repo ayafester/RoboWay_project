@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class ChangeConditionToBlock : MonoBehaviour
 {
-   
-    public static bool isContact = false;
     public static bool isIf = false;
-
+    
     public Sprite block;
     private SpriteRenderer spriteRend;
     void Start()
@@ -21,6 +19,8 @@ public class ChangeConditionToBlock : MonoBehaviour
         {
             spriteRend.sprite = block;
             isIf = true;
+            Debug.Log(isIf + " в change condition to block ");
+
         }
     }
 }

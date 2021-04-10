@@ -109,21 +109,37 @@ public class DropItem : MonoBehaviour, IDropHandler
 
     private void SetColor()
     {
-        IfSlots.GetComponent<CanvasGroup>().alpha = 1f;
-        //IfSlotsController.SetActive(true);
-        for (int i = 2; i < IfSlots.transform.childCount; i++)
+        if(IfSlots.transform.GetChild(2).tag == "input")
         {
-            IfSlots.transform.GetChild(i).GetComponent<DropItem>().enabled = true;
+            IfSlots.transform.GetChild(2).GetComponent<InputField>().interactable = true;
+            
+            IfSlots.GetComponent<CanvasGroup>().alpha = 1f;
+            for (int i = 3; i < IfSlots.transform.childCount; i++)
+            {
+                IfSlots.transform.GetChild(i).GetComponent<DropItem>().enabled = true;
+            }
+        } else
+        {
+            IfSlots.GetComponent<CanvasGroup>().alpha = 1f;
+            for (int i = 2; i < IfSlots.transform.childCount; i++)
+            {
+                IfSlots.transform.GetChild(i).GetComponent<DropItem>().enabled = true;
+            }
+
         }
+        
         
     }
 
     public void DeleteColor()
     {
         IfSlots.GetComponent<CanvasGroup>().alpha = 0.4f;
-
-       // IfSlotsController.SetActive(false);
-        if(IfSlots.transform.GetChild(2).childCount == 1)
+        if (IfSlots.transform.GetChild(2).tag == "input")
+        {
+            IfSlots.transform.GetChild(2).GetComponent<InputField>().interactable = false;
+        }
+            // IfSlotsController.SetActive(false);
+            if (IfSlots.transform.GetChild(2).childCount == 1)
         {
             Destroy(IfSlots.transform.GetChild(2).transform.GetChild(0).gameObject);
         }

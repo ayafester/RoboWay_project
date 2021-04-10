@@ -53,7 +53,6 @@ public class OpenDoor : MonoBehaviour
 
         anim.Play("RightUp");
 
-        Debug.Log("ухожу в закат" + Collider.isCollision + ChangeConditionToBlock.isContact);
         Vector3 end = new Vector3(-2.73f, -4.12f, -13.8f);
         float totalMovementTime = 25f; //время для передвижения
         float currentMovementTime = 0f;//время которое прошло
@@ -61,10 +60,6 @@ public class OpenDoor : MonoBehaviour
         {
             currentMovementTime += Time.deltaTime;
             if (Collider.isCollision == true)
-            {
-                break;
-            }
-            if (ChangeConditionToBlock.isContact == true)
             {
                 break;
             }
