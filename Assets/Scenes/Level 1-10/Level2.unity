@@ -173,7 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &14357737
@@ -763,7 +764,6 @@ Transform:
   - {fileID: 1977198203}
   - {fileID: 2059829942}
   - {fileID: 1164960418}
-  - {fileID: 904805278}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1188,7 +1188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &290896113
@@ -1724,7 +1725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &408182251
@@ -1930,7 +1932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &500799212
@@ -2034,7 +2037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &510766481
@@ -2775,7 +2779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &639192938
@@ -3353,9 +3358,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb5d3b94dba8b548b0e4eda403058a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InputnumOfFunc: {fileID: 0}
   block: 1
   level: 2
   bestCommand: 3
+  isIfActive: 0
   unk: {fileID: 0}
   zad: {fileID: 21300000, guid: a95b2d172b367bf4ba9e7a165db56d63, type: 3}
   pered: {fileID: 21300000, guid: 59a22b9aa80b0544782e569de879913e, type: 3}
@@ -3367,8 +3374,11 @@ MonoBehaviour:
   det: {fileID: 1853144417}
   slots: {fileID: 214293122}
   slotsList: []
-  ifSlots: {fileID: 214293122}
-  ifSlotsList: []
+  Condition: {fileID: 0}
+  ifSlotsPlus: {fileID: 0}
+  ifSlotsListPlus: []
+  ifSlotsMinus: {fileID: 0}
+  ifSlotsListMinus: []
   okeyButton: {fileID: 2021376872}
   counter: 0
   counterCommand: 0
@@ -3607,7 +3617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &881418904
@@ -3659,51 +3670,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881418901}
   m_CullTransparentMesh: 0
---- !u!1 &904805277
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 904805278}
-  - component: {fileID: 904805279}
-  m_Layer: 0
-  m_Name: IfSlotController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &904805278
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904805277}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 177951036}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &904805279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904805277}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a779b54933073144ca9df921626ad6d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slots: {fileID: 0}
-  ifSlotsList: []
 --- !u!1 &941555379
 GameObject:
   m_ObjectHideFlags: 0
@@ -4843,7 +4809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1214743204
@@ -5397,7 +5364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1428184242
@@ -5513,7 +5481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1464505474
@@ -5982,7 +5951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1661290468
@@ -6049,7 +6019,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1683366508
@@ -7063,7 +7034,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1947749575
@@ -7167,7 +7139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc3eb0572be82c4b9ea1e78a6e80c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IfSlots: {fileID: 0}
+  Condition: {fileID: 0}
+  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1971949576
@@ -7248,6 +7221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988a01b2ac1dcdb4aa8bd25af018d94a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockques: {fileID: 0}
+  wall: {fileID: 0}
 --- !u!4 &1977198203
 Transform:
   m_ObjectHideFlags: 0
@@ -7629,9 +7604,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb5d3b94dba8b548b0e4eda403058a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InputnumOfFunc: {fileID: 0}
   block: 0
   level: 0
   bestCommand: 0
+  isIfActive: 0
   unk: {fileID: 0}
   zad: {fileID: 0}
   pered: {fileID: 0}
@@ -7643,8 +7620,11 @@ MonoBehaviour:
   det: {fileID: 1853144417}
   slots: {fileID: 214293122}
   slotsList: []
-  ifSlots: {fileID: 0}
-  ifSlotsList: []
+  Condition: {fileID: 0}
+  ifSlotsPlus: {fileID: 0}
+  ifSlotsListPlus: []
+  ifSlotsMinus: {fileID: 0}
+  ifSlotsListMinus: []
   okeyButton: {fileID: 2021376872}
   counter: 0
   counterCommand: 0
@@ -7865,6 +7845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myLight: {fileID: 873339179}
+  isCondition: 0
   _slot: {fileID: 214293122}
 --- !u!1 &2069282689
 GameObject:

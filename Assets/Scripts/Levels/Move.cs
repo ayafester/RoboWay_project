@@ -16,7 +16,8 @@ public class Move : MonoBehaviour
     public int block;
     public int level;
     public int bestCommand;
-    public bool isIfActive;
+
+    public static bool isIfActive = false;
 
     private string levelName;
 
@@ -28,7 +29,7 @@ public class Move : MonoBehaviour
     public Sprite legPered;
 
     //контроль действий
-    private bool isDestroyDetail;
+    //private bool isDestroyDetail = false;
 
     //контроль результатов
     public GameObject Again; //панель снова изза детали
@@ -45,10 +46,14 @@ public class Move : MonoBehaviour
     public List<Transform> slotsList;//массив слотов
     private int slotsCount;//количество слотов
 
-    public GameObject ifSlots;
-    public List<Transform> ifSlotsList;//массив слотов
+    public GameObject Condition;
 
-    
+    public GameObject ifSlotsPlus;
+    public List<Transform> ifSlotsListPlus;//массив слотов
+
+    public GameObject ifSlotsMinus;
+    public List<Transform> ifSlotsListMinus;//массив слотов
+
 
     public Button okeyButton;//кнопка ок
     public int counter; //сколько сделал шагов персонаж, чтобы вывести в результат
@@ -58,9 +63,16 @@ public class Move : MonoBehaviour
     private Rigidbody2D rb; //компоненты персонажа
     private Animation anim;
 
+    int lastSlot;
+    bool isLast;
 
     private void Start()
     {
+        Collider.isCollision = false;
+        OpenDoor.isDoorOpen = false;
+        //isDestroyDetail = false;
+        isLast = false;
+
         levelName = block.ToString() + level.ToString();
         if (PlayerPrefs.GetInt("LevelName" + levelName) == 0)
         {
@@ -69,7 +81,7 @@ public class Move : MonoBehaviour
         rb = player.GetComponent<Rigidbody2D>();
         anim = player.GetComponent<Animation>();
 
-        isDestroyDetail = false; //говорим, что деталь не взяли
+        //isDestroyDetail = false; //говорим, что деталь не взяли
          //запоминаем начальную позицию
 
         margin.x = 1.36f; //расстояние для шагов по х у
@@ -82,11 +94,21 @@ public class Move : MonoBehaviour
         {
             slotsList.Add(slots.transform.GetChild(i)); //инициализация слотов
         }
-        for (int k = 0; k < ifSlots.transform.childCount; k++)
-        {
-            ifSlotsList.Add(ifSlots.transform.GetChild(k)); //инициализация слотов
-        }
 
+        if (ifSlotsPlus != null)
+        {
+            for (int k = 0; k < ifSlotsPlus.transform.childCount; k++)
+            {
+                ifSlotsListPlus.Add(ifSlotsPlus.transform.GetChild(k)); //инициализация слотов ифа плюсов
+            }
+        }
+        if (ifSlotsMinus != null)
+        {
+            for (int k = 0; k < ifSlotsMinus.transform.childCount; k++)
+            {
+                ifSlotsListMinus.Add(ifSlotsMinus.transform.GetChild(k)); //инициализация слотов ифа минусов
+            }
+        }
         Button btn = okeyButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);//присваиваем вызов по кнопке
     }
@@ -99,24 +121,18 @@ public class Move : MonoBehaviour
             StartCoroutine(Step(slotsList, i, _speedOfMove));//вызываем шаг со скоростью 
         }
         okeyButton.interactable = false; //делаем кнопку недоступной
-        if(isDestroyDetail == false)
+       
+        if(isIfActive)
         {
-            if(isIfActive)
-            {
-                Invoke("checkDetail", _speedOfMove + 7);
-            } else
-            {
-                Invoke("checkDetail", _speedOfMove + 1);
-            }
-            
+            Invoke("checkDetail", _speedOfMove + 7);
+        } else
+        {
+            Invoke("checkDetail", _speedOfMove + 1);
         }
-        //итоговый вызов проверки деталей и шагов
-
         Collider.isCollision = false;
-        //ChangeConditionToBlock.isIf = true;
-
         OpenDoor.isDoorOpen = false;
-        isDestroyDetail = false;
+        //isDestroyDetail = false;
+        isLast = false;
     }
 
     private void checkDetail()
@@ -124,9 +140,26 @@ public class Move : MonoBehaviour
         StopAllCoroutines();
         CancelInvoke();
 
-        if (level == 1)
+        Debug.Log("check det");
+
+        if (level == 1 && block == 1)
         {
-            if (OpenDoor.isDoorOpen == true)
+            /*for (int i = 0; i < slotsCount; i++)
+            {
+                if (slotsList[i].childCount == 2)
+                {
+                    lastSlot = i;
+                }
+            }
+
+            if (slotsList[lastSlot + 1].childCount == 2)
+            {
+                isLast = false; //значит, что тэйк не последний элемент
+            }
+            */
+            isLast = true;
+
+            if (OpenDoor.isDoorOpen == true && isLast == true)
             {
                 Result();
             }
@@ -134,10 +167,27 @@ public class Move : MonoBehaviour
             {
                 Again.SetActive(true);
             }
-        }
-        else
+        } else if(block == 2 || block == 3 || block == 1)
         {
-            if (isDestroyDetail == false)
+            for(int i = 0; i< slotsCount; i++)
+            {
+                if(slotsList[i].childCount > 1)
+                {
+                    if (slotsList[i].GetChild(1).tag == "take")
+                    {
+                        isLast = isEndAction();
+                    }
+                }
+            }
+            
+            Debug.Log(OnCollisionDetail.isContact + "isDestroy");
+            Debug.Log(isLast);
+
+            if (OnCollisionDetail.isContact == true && isLast == true)
+            {
+                Result();
+            }
+            else
             {
                 Again.SetActive(true);
             }
@@ -180,14 +230,14 @@ public class Move : MonoBehaviour
             {
 
                 yield return new WaitForSeconds(speed);
-                Take();
+                //Take();
 
             }
             else if (list[num].GetChild(1).tag == "if")
             {
                 yield return new WaitForSeconds(speed);
                 StartCoroutine(IfFunc());
-                isIfActive = true;
+                //isIfActive = true;
             }
             else if (list[num].GetChild(1).tag == "func")
             {
@@ -199,9 +249,9 @@ public class Move : MonoBehaviour
 
                     for (int k = 0; k < numOfFunc; k++)
                     {
-                        for (int i = 3; i < ifSlotsList.Count; i++)
+                        for (int i = 0; i < ifSlotsListPlus.Count; i++)
                         {
-                            StartCoroutine(Step(ifSlotsList, i, _speedOfMove));
+                            StartCoroutine(Step(ifSlotsListPlus, i, _speedOfMove));
                         }
                     }
 
@@ -218,36 +268,79 @@ public class Move : MonoBehaviour
     public IEnumerator IfFunc()
     {
         Debug.Log("if");
-        if (ifSlotsList[2].transform.childCount > 0) //если слот условия не пустой
+        if (Condition.transform.GetChild(3).childCount > 0) //если слот условия не пустой
         {
             Debug.Log(ChangeConditionToBlock.isIf + " isif");
 
-            if (ifSlotsList[2].transform.GetChild(0).transform.tag == unk.tag && ChangeConditionToBlock.isIf == true) //если совпадают тэги в условии и тег стены
+            if (unk.tag == "WallWood" && ChangeConditionToBlock.isIf == true) //если совпадают тэги в условии и тег стены
             {
                 Debug.Log("подошел по условиям");
 
-                for (int i = 3; i < ifSlotsList.Count; i++)
+                for (int i = 0; i < ifSlotsListPlus.Count; i++)
                 {
                     Debug.Log("куротину внизу должна начаться");
-                    StartCoroutine(Step(ifSlotsList, i, _speedOfMove-5));
+                    StartCoroutine(Step(ifSlotsListPlus, i, _speedOfMove - 5));
+                    
                 }
 
+            } else if(unk.tag == "Pole")
+            {
+                for (int i = 0; i < ifSlotsListMinus.Count; i++)
+                {
+                    Debug.Log("куротину внизу должна начаться");
+                    StartCoroutine(Step(ifSlotsListMinus, i, _speedOfMove - 5));
+                    
+                }
             }
         }
+        
         yield return null;
 
     }
 
-    void Take()
+    private bool isEndAction()
     {
-        if (OnCollisionDetail.isContact == true)
+        for (int i = 0; i < slotsCount; i++)
         {
+            if (slotsList[i].GetChild(1).tag == "take")
+            {
+                lastSlot = i;
+                Debug.Log(lastSlot);
+                if(lastSlot != 0)
+                {
+                    break;
+                }
+                
+            }
+        }
+
+        if (slotsList[lastSlot + 1].childCount == 2)
+        {
+            Debug.Log(lastSlot + 1 + " Это следующий элемент от тейка и он не пустой");
+            return false;
+        }
+        else return true;
+        
+    }
+    /*void Take()
+    {
+        isLast = isEndAction();
+
+        Debug.Log("take " + isLast);
+
+        if (OnCollisionDetail.isContact == true && isLast == true)
+        {
+            Debug.Log(isLast + " " + lastSlot);
+
             Destroy(det);
             isDestroyDetail = true;
+
             StopAllCoroutines();
+            CancelInvoke();
+
             Result();
         }
-    }
+    }*/
 
     void Result()
     {
