@@ -8,6 +8,8 @@ public class EnabledSlots : MonoBehaviour
 {
     public GameObject myLight;
     public bool isCondition;
+    public bool isFunc;
+
 
     public class Slots //класс слот
     {
@@ -35,7 +37,7 @@ public class EnabledSlots : MonoBehaviour
 
     void Update()
     {
-        if(!isCondition) //когда работаем с обычным слотом
+        if(!isCondition && !isFunc) //когда работаем с обычным слотом
         {
             if (slotsList[0].slot.childCount == 1)
             {
@@ -75,16 +77,75 @@ public class EnabledSlots : MonoBehaviour
                         if (slotsList[k].slot.childCount > 1)
                         {
                             Destroy(slotsList[k].slot.GetChild(1).gameObject);
+                            if(slotsList[k].slot.GetChild(1).gameObject.tag == "if")
+                            {
+                                slotsList[k].slot.GetComponent<DropItem>().DeleteColor();
+                            }
+                            if (slotsList[k].slot.GetChild(1).gameObject.tag == "func")
+                            {
+                                slotsList[k].slot.GetComponent<DropItem>().DeletColorFunc();
+                            }
                             slotsList[k].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
                         }
                     }
                 }
             }
-        } else
+        } else if(isCondition)
         {
             myLight.SetActive(false);
 
             if(ConditionEnabled.isActiveCondition)
+            {
+                myLight.SetActive(true);
+                if (slotsList[0].slot.childCount == 1)
+                {
+                    slotsList[0].slot.GetComponent<RectTransform>().localScale = new Vector3(1.1f, 1.1f, 1f);
+
+                    myLight.transform.position = slotsList[0].slot.position;
+                    myLight.GetComponent<Image>().color = slotsList[0].slot.GetComponent<Image>().color;
+
+                    slotsList[0].slot.GetComponent<DropItem>().enabled = true;
+
+                    for (int i = 1; i < _slot.transform.childCount; i++)
+                    {
+                        slotsList[i].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                    }
+                }
+
+
+                for (int i = 0; i < _slot.transform.childCount; i++)
+                {
+                    if (slotsList[i].slot.childCount == 2)
+                    {
+                        for (int m = 0; m < _slot.transform.childCount; m++)
+                        {
+                            slotsList[m].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                        }
+
+                        slotsList[i + 1].script.enabled = true;
+                        slotsList[i + 1].slot.GetComponent<RectTransform>().localScale = new Vector3(1.1f, 1.1f, 1f);
+
+                        myLight.transform.position = slotsList[i + 1].slot.position;
+                        myLight.GetComponent<Image>().color = slotsList[i + 1].slot.GetComponent<Image>().color;
+                    }
+                    else
+                    {
+                        for (int k = i; k < _slot.transform.childCount; k++)
+                        {
+                            if (slotsList[k].slot.childCount > 1)
+                            {
+                                Destroy(slotsList[k].slot.GetChild(1).gameObject);
+                                slotsList[k].slot.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                            }
+                        }
+                    }
+                }
+            }
+        } else if(isFunc)
+        {
+            myLight.SetActive(false);
+
+            if (InputFieldEnabled.isInput)
             {
                 myLight.SetActive(true);
                 if (slotsList[0].slot.childCount == 1)

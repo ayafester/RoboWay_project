@@ -48,7 +48,7 @@ public class DropItem : MonoBehaviour, IDropHandler
                         } else if (item.tag == "func") {
 
                             item.SetItemToSlot(transform);
-                            SetColor();
+                            SetColotFunc();
                         }
                         else
                         {
@@ -64,7 +64,7 @@ public class DropItem : MonoBehaviour, IDropHandler
                         }
                         if (thisSlot.transform.GetChild(1).gameObject.tag == "func")
                         {
-                            DeleteColor();
+                            DeletColorFunc();
                         }
                         item.SetItemToSlot(transform);
                         if(item.tag == "if")
@@ -72,7 +72,7 @@ public class DropItem : MonoBehaviour, IDropHandler
                             SetColor();
                         } else if(item.tag == "func")
                         {
-                            SetColor();
+                            SetColotFunc();
 
                         }
                     }
@@ -93,19 +93,43 @@ public class DropItem : MonoBehaviour, IDropHandler
                 }
             } 
         }
-       /*if (item.transform.Find("DragItem") != null) 
-        {
-            Debug.Log("Непонятно что я делаю");
-            var script = item.GetComponent<DragItem>();
-            Destroy(script);
-        }*/
-        
     }
 
+    private void SetColotFunc()
+    {
+        Condition.GetComponent<CanvasGroup>().alpha = 1f;
+        Condition.transform.GetChild(1).transform.GetComponent<InputField>().interactable = true;
+        for (int i = 0; i < Condition.transform.GetChild(2).childCount; i++)
+        {
+            Condition.transform.GetChild(2).transform.GetChild(i).GetComponent<DropItem>().enabled = true;
+            
+        }
+    }
+
+    public void DeletColorFunc() 
+    {
+        Condition.GetComponent<CanvasGroup>().alpha = 0.4f;
+        Condition.transform.GetChild(1).transform.GetComponent<InputField>().interactable = false;
+        if(Condition.transform.GetChild(1).transform.GetComponent<InputField>().text != "")
+        {
+            Condition.transform.GetChild(1).transform.GetComponent<InputField>().text = null;
+        }
+        for (int i = 0; i < Condition.transform.GetChild(2).childCount; i++)
+        {
+            Condition.transform.GetChild(2).transform.GetChild(i).GetComponent<DropItem>().enabled = false;
+            if(Condition.transform.GetChild(2).transform.GetChild(i).childCount > 1)
+            {
+                Destroy(Condition.transform.GetChild(2).transform.GetChild(i).transform.GetChild(1).gameObject);
+            }
+
+        }
+    }
     private void SetColor()
     {
+        
         LightCon.SetActive(true);
         Move.isIfActive = true;
+
         Condition.GetComponent<CanvasGroup>().alpha = 1f;
         Condition.transform.GetChild(3).GetComponent<DropItem>().enabled = true; // слот для условия
         for (int i = 0; i < Condition.transform.GetChild(4).childCount; i++)
