@@ -633,7 +633,7 @@ RectTransform:
   m_Children:
   - {fileID: 1202890434}
   m_Father: {fileID: 303625086}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1037,9 +1037,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 638313542}
+  - {fileID: 1126319884}
   - {fileID: 191675149}
   - {fileID: 2086125441}
-  - {fileID: 1126319884}
   - {fileID: 605342892}
   m_Father: {fileID: 1898918847}
   m_RootOrder: 0
@@ -2823,7 +2823,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 303625086}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4926,7 +4926,7 @@ RectTransform:
   m_Children:
   - {fileID: 664613757}
   m_Father: {fileID: 303625086}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5057,10 +5057,14 @@ MonoBehaviour:
   det2: {fileID: 288846861}
   det3: {fileID: 180088125}
   det4: {fileID: 1987381174}
+  det5: {fileID: 0}
+  det6: {fileID: 0}
   place1: {fileID: 469208160}
   place2: {fileID: 1129563131}
   place3: {fileID: 687732172}
   place4: {fileID: 1848884049}
+  place5: {fileID: 0}
+  place6: {fileID: 0}
   level: 6
   block: 1
   bestCommand: 4
