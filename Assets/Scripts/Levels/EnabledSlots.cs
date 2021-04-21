@@ -143,10 +143,7 @@ public class EnabledSlots : MonoBehaviour
             }
         } else if(isFunc)
         {
-            myLight.SetActive(false);
-
-            if (InputFieldEnabled.isInput)
-            {
+            
                 myLight.SetActive(true);
                 if (slotsList[0].slot.childCount == 1)
                 {
@@ -191,7 +188,7 @@ public class EnabledSlots : MonoBehaviour
                         }
                     }
                 }
-            }
+            
         }
         
 

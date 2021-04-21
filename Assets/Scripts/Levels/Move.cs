@@ -10,8 +10,10 @@ using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
-    public InputField InputnumOfFunc;
-    private int numOfFunc;
+    public GameObject blockPanel;
+
+    public Button inputNum;
+    private int numOfFunc = 1;
 
     public int block;
     public int level;
@@ -68,12 +70,13 @@ public class Move : MonoBehaviour
 
     private void Start()
     {
+        blockPanel.SetActive(false);
         Collider.isCollision = false;
         OpenDoor.isDoorOpen = false;
-        //isDestroyDetail = false;
         isLast = false;
 
         levelName = block.ToString() + level.ToString();
+
         if (PlayerPrefs.GetInt("LevelName" + levelName) == 0)
         {
             PlayerPrefs.SetInt("LevelName" + levelName, 0);
@@ -121,12 +124,36 @@ public class Move : MonoBehaviour
             StartCoroutine(Step(slotsList, i, _speedOfMove));//вызываем шаг со скоростью 
         }
         okeyButton.interactable = false; //делаем кнопку недоступной
-       
-        if(isIfActive)
+        blockPanel.SetActive(true);
+        if(isIfActive) //когда работаем с ифом
         {
-            Invoke("checkDetail", _speedOfMove + 7);
+            if (level == 1)
+            {
+                Debug.Log("if" + level);
+                Invoke("checkDetail", _speedOfMove + 5);
+            } else if (level == 2)
+            {
+                Debug.Log("if"  + level);
+                Invoke("checkDetail", _speedOfMove + 4);
+            } else if (level == 3)
+            {
+                Debug.Log("if" + level);
+                Invoke("checkDetail", _speedOfMove + 7);
+            }
+            else if (level == 4)
+            {
+                Debug.Log("if" + level);
+                Invoke("checkDetail", _speedOfMove + 4);
+            }
+            else if (level == 5)
+            {
+                Debug.Log("if" + level);
+                Invoke("checkDetail", _speedOfMove + 9);
+            }
+
         } else
         {
+            Debug.Log("Это обычный случай");
             Invoke("checkDetail", _speedOfMove + 1);
         }
         Collider.isCollision = false;
@@ -180,7 +207,7 @@ public class Move : MonoBehaviour
                 }
             }
             
-            Debug.Log(OnCollisionDetail.isContact + "isDestroy");
+            Debug.Log(OnCollisionDetail.isContact + " isDestroy");
             Debug.Log(isLast);
 
             if (OnCollisionDetail.isContact == true && isLast == true)
@@ -260,11 +287,7 @@ public class Move : MonoBehaviour
         }
         ChangeConditionToBlock.isIf = false;
     }
-    public void SetNumOfFunc()
-    {
-        numOfFunc = int.Parse(InputnumOfFunc.text);
-
-    }
+    
     public IEnumerator IfFunc()
     {
         Debug.Log("if");
@@ -362,7 +385,41 @@ public class Move : MonoBehaviour
         PlayerPrefs.SetInt("CounterCommand" + levelName, counterCommand);
     }
 
+    private void Update()
+    {
+        if(block == 3)
+        {
+            if (numOfFunc == 1)
+            {
 
+                inputNum.transform.GetChild(0).GetComponent<Text>().text = "1";
+            }
+            else if (numOfFunc == 2)
+            {
+
+                inputNum.transform.GetChild(0).GetComponent<Text>().text = "2";
+            }
+            else if (numOfFunc == 3)
+            {
+
+                inputNum.transform.GetChild(0).GetComponent<Text>().text = "3";
+            }
+            else if (numOfFunc == 4)
+            {
+
+                inputNum.transform.GetChild(0).GetComponent<Text>().text = "4";
+            }
+        }
+        
+    }
+    public void SetNewNum()
+    {
+        numOfFunc += 1;
+        if(numOfFunc == 5)
+        {
+            numOfFunc = 1;
+        }
+    }
     //корутина для плавного движения
     public IEnumerator moveObjectRightDown()
     {

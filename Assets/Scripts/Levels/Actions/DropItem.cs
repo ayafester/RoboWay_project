@@ -16,7 +16,7 @@ public class DropItem : MonoBehaviour, IDropHandler
     public int situation;
     private DropItem thisSlot;
     private int childCount;
-
+    public static int isIfWas;
     
     public void OnDrop(PointerEventData eventData)
     {
@@ -39,16 +39,22 @@ public class DropItem : MonoBehaviour, IDropHandler
                 if (item.tag != "WallWood")
                 {
                     if (thisSlot.transform.childCount == 1)
-                   {
+                    {
                         if (item.tag == "if")
                         {
-                            item.SetItemToSlot(transform);
-                            SetColor();
+                            if(ActionIfFuncController.isIfActiv == false)
+                            {
+                                item.SetItemToSlot(transform);
+                                SetColor();
+                            }
 
                         } else if (item.tag == "func") {
 
-                            item.SetItemToSlot(transform);
-                            SetColotFunc();
+                            if (ActionIfFuncController.isIfActiv == false)
+                            {
+                                item.SetItemToSlot(transform);
+                                SetColotFunc();
+                            }
                         }
                         else
                         {
@@ -57,23 +63,40 @@ public class DropItem : MonoBehaviour, IDropHandler
 
                    } else if (thisSlot.transform.childCount == 2)
                    {
-                        Destroy(thisSlot.transform.GetChild(1).gameObject); //заменяем обьект на новый
-                        if (thisSlot.transform.GetChild(1).gameObject.tag == "if")
+                        if(item.tag == "if" || item.tag == "func")
                         {
-                            DeleteColor(); 
-                        }
-                        if (thisSlot.transform.GetChild(1).gameObject.tag == "func")
+                            if(item.tag == "if")
+                            {
+                                if (ActionIfFuncController.isIfActiv == false)
+                                {
+                                    Destroy(thisSlot.transform.GetChild(1).gameObject);
+                                    item.SetItemToSlot(transform);
+                                    SetColor();
+                                }
+                            } else if(item.tag == "func")
+                            {
+                                if (ActionIfFuncController.isIfActiv == false)
+                                {
+                                    Destroy(thisSlot.transform.GetChild(1).gameObject);
+                                    item.SetItemToSlot(transform);
+                                    SetColotFunc();
+                                }
+                            }
+                            
+                        } else
                         {
-                            DeletColorFunc();
-                        }
-                        item.SetItemToSlot(transform);
-                        if(item.tag == "if")
-                        {
-                            SetColor();
-                        } else if(item.tag == "func")
-                        {
-                            SetColotFunc();
-
+                            Destroy(thisSlot.transform.GetChild(1).gameObject);
+                            item.SetItemToSlot(transform);
+                            if (thisSlot.transform.GetChild(1).gameObject.tag == "if")
+                            {
+                                DeleteColor();
+                                ActionIfFuncController.isIfActiv = false;
+                            }
+                            if (thisSlot.transform.GetChild(1).gameObject.tag == "func")
+                            {
+                                DeletColorFunc();
+                                ActionIfFuncController.isIfActiv = false;
+                            }
                         }
                     }
                 } 
@@ -94,11 +117,23 @@ public class DropItem : MonoBehaviour, IDropHandler
             } 
         }
     }
-
+    private void Update()
+    {
+        
+        /*
+        for (int i = 0; i < slotsList.Count; i++)
+        {
+            if (slotsList[i].GetChild(1).tag == "if" || slotsList[i].GetChild(1).tag == "func")
+            {
+                isIfWas = 1;
+                break;
+            }
+        }*/
+    }
     private void SetColotFunc()
     {
         Condition.GetComponent<CanvasGroup>().alpha = 1f;
-        Condition.transform.GetChild(1).transform.GetComponent<InputField>().interactable = true;
+        Condition.transform.GetChild(1).transform.GetComponent<Button>().interactable = true;
         for (int i = 0; i < Condition.transform.GetChild(2).childCount; i++)
         {
             Condition.transform.GetChild(2).transform.GetChild(i).GetComponent<DropItem>().enabled = true;
@@ -109,11 +144,8 @@ public class DropItem : MonoBehaviour, IDropHandler
     public void DeletColorFunc() 
     {
         Condition.GetComponent<CanvasGroup>().alpha = 0.4f;
-        Condition.transform.GetChild(1).transform.GetComponent<InputField>().interactable = false;
-        if(Condition.transform.GetChild(1).transform.GetComponent<InputField>().text != "")
-        {
-            Condition.transform.GetChild(1).transform.GetComponent<InputField>().text = null;
-        }
+        Condition.transform.GetChild(1).transform.GetComponent<Button>().interactable = false;
+       
         for (int i = 0; i < Condition.transform.GetChild(2).childCount; i++)
         {
             Condition.transform.GetChild(2).transform.GetChild(i).GetComponent<DropItem>().enabled = false;
@@ -131,7 +163,7 @@ public class DropItem : MonoBehaviour, IDropHandler
         Move.isIfActive = true;
 
         Condition.GetComponent<CanvasGroup>().alpha = 1f;
-        Condition.transform.GetChild(3).GetComponent<DropItem>().enabled = true; // слот для условия
+        
         for (int i = 0; i < Condition.transform.GetChild(4).childCount; i++)
         {
             if(ConditionEnabled.isActiveCondition)
@@ -156,11 +188,8 @@ public class DropItem : MonoBehaviour, IDropHandler
         LightCon.SetActive(false);
         Move.isIfActive = false;
         Condition.GetComponent<CanvasGroup>().alpha = 0.4f;
-        Condition.transform.GetChild(3).GetComponent<DropItem>().enabled = false; // слот для условия
-        if(Condition.transform.GetChild(3).childCount>0)
-        {
-            Destroy(Condition.transform.GetChild(3).transform.GetChild(0).gameObject);
-        }
+        
+        
         for (int i = 0; i < Condition.transform.GetChild(4).childCount; i++)
         {
             Condition.transform.GetChild(4).transform.GetChild(i).GetComponent<DropItem>().enabled = false;

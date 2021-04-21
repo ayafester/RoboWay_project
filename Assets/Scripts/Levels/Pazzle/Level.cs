@@ -8,11 +8,16 @@ public class Level : MonoBehaviour
     public RectTransform det2;
     public RectTransform det3;
     public RectTransform det4;
+    public RectTransform det5;
+    public RectTransform det6;
+
 
     public RectTransform place1;
     public RectTransform place2;
     public RectTransform place3;
     public RectTransform place4;
+    public RectTransform place5;
+    public RectTransform place6;
 
     public int level;
     public int block;
@@ -56,7 +61,31 @@ public class Level : MonoBehaviour
                 Result();
             }
         }
-        
-      
+        if(block == 2)
+        {
+            if (det1.anchoredPosition == place1.anchoredPosition
+            && det2.anchoredPosition == place2.anchoredPosition
+            && det3.anchoredPosition == place3.anchoredPosition
+            && det4.anchoredPosition == place4.anchoredPosition
+            && det5.anchoredPosition == place5.anchoredPosition
+            && det6.anchoredPosition == place6.anchoredPosition)
+            {
+                ResultPanel.SetActive(true);
+                Result();
+            }
+        }
+        if (block == 3)
+        {
+            if (det1.anchoredPosition == place1.anchoredPosition
+            && det2.anchoredPosition == place2.anchoredPosition
+            && det3.anchoredPosition == place3.anchoredPosition
+            && det4.anchoredPosition == place4.anchoredPosition
+            && det5.anchoredPosition == place5.anchoredPosition
+            && det6.anchoredPosition == place6.anchoredPosition)
+            {
+                ResultPanel.SetActive(true);
+                Result();
+            }
+        }
     }
 }
