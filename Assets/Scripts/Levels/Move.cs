@@ -70,6 +70,10 @@ public class Move : MonoBehaviour
 
     private void Start()
     {
+        if(block == 3)
+        {
+            isIfActive = false;
+        }
         blockPanel.SetActive(false);
         Collider.isCollision = false;
         OpenDoor.isDoorOpen = false;
@@ -153,8 +157,16 @@ public class Move : MonoBehaviour
 
         } else
         {
-            Debug.Log("Это обычный случай");
-            Invoke("checkDetail", _speedOfMove + 1);
+            if (block == 1)
+            {
+                Debug.Log("Это 1 блок");
+                Invoke("checkDetail", _speedOfMove + 1);
+            } else if(block == 3)
+            {
+                Debug.Log("Это 3 блок");
+                Invoke("checkDetail", _speedOfMove - 2);
+            }
+            
         }
         Collider.isCollision = false;
         OpenDoor.isDoorOpen = false;

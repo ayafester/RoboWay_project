@@ -1797,6 +1797,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel1: {fileID: 1986832843}
+  level: 0
+  education: {fileID: 0}
 --- !u!4 &1162984055
 Transform:
   m_ObjectHideFlags: 0
@@ -2650,8 +2652,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.7000122, y: -10.899994}
-  m_SizeDelta: {x: 793.5488, y: 307.0327}
+  m_AnchoredPosition: {x: -9.900024, y: -8.700012}
+  m_SizeDelta: {x: 1201.8428, y: 810.5952}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1704390453
 MonoBehaviour:
@@ -3522,7 +3524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 367.80008, y: 61.999958}
+  m_AnchoredPosition: {x: 367.80008, y: 61.999954}
   m_SizeDelta: {x: 686.72095, y: 91.54889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2065203954
@@ -3572,7 +3574,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0426\u0435\u043B\u044C: \u0432\u0437\u044F\u0442\u044C \u0434\u0435\u0442\u0430\u043B\u044C"
+  m_Text: "\u0426\u0435\u043B\u044C: \u0441\u043E\u0431\u0440\u0430\u0442\u044C \u043F\u0430\u0437\u043B"
 --- !u!222 &2065203956
 CanvasRenderer:
   m_ObjectHideFlags: 0

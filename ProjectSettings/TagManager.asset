@@ -74,6 +74,9 @@ TagManager:
   - name: Grid
     uniqueID: 3197535481
     locked: 0
+  - name: Wall
+    uniqueID: 1930875199
+    locked: 0
   - name: Player
     uniqueID: 1438922649
     locked: 0

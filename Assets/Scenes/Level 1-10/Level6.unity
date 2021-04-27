@@ -289,6 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel1: {fileID: 9278700}
+  level: 0
+  education: {fileID: 0}
 --- !u!4 &138652608
 Transform:
   m_ObjectHideFlags: 0
@@ -751,7 +753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1563.9, y: -894.8}
+  m_AnchoredPosition: {x: -1543.5, y: -983.97}
   m_SizeDelta: {x: 635.2378, y: 71.17645}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &456162636
@@ -1626,8 +1628,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.7000122, y: -10.899994}
-  m_SizeDelta: {x: 793.5488, y: 307.0327}
+  m_AnchoredPosition: {x: 12.799988, y: -4.100006}
+  m_SizeDelta: {x: 1038.5254, y: 701.7168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &749003657
 MonoBehaviour:

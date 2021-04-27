@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &14357737
@@ -351,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 1661290463}
 --- !u!114 &31228064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 1661290463}
 --- !u!114 &40714914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1299,6 +1300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 1661290463}
 --- !u!114 &168197478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,6 +1465,7 @@ Transform:
   - {fileID: 1164960418}
   - {fileID: 130888474}
   - {fileID: 818464251}
+  - {fileID: 1237523790}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1500,8 +1503,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 948.64, y: 164.6701}
-  m_SizeDelta: {x: -743.05505, y: -524.5141}
+  m_AnchoredPosition: {x: 948.64, y: 173.3}
+  m_SizeDelta: {x: -743.05505, y: -507.25735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &202550988
 MonoBehaviour:
@@ -1869,7 +1872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -136.15, y: -513}
+  m_AnchoredPosition: {x: -130.15, y: -539.62}
   m_SizeDelta: {x: 199.9065, y: 199.83008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &278802151
@@ -2036,7 +2039,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &290896113
@@ -2248,7 +2250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &333125587
@@ -2352,6 +2353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 1661290463}
 --- !u!114 &333771844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2455,7 +2457,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &337277175
@@ -2559,6 +2560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 1661290463}
 --- !u!114 &376396009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2745,7 +2747,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1097431815
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 31eb834a1e68e6545833e0ebb4a7ee12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3201,7 +3203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &408182251
@@ -3722,7 +3723,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &500799212
@@ -3901,7 +3901,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &510766481
@@ -5139,7 +5138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &639192938
@@ -5242,6 +5240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!114 &645276183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6820,7 +6819,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &881418904
@@ -7242,7 +7240,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1097431815
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2be1a63ff406f9440baf2a39d2961554, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7546,7 +7544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.162}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -145.23, y: -208}
+  m_AnchoredPosition: {x: -145.23, y: -153.44}
   m_SizeDelta: {x: 89.10431, y: 90.805725}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &965279012
@@ -7652,7 +7650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &966215124
@@ -9140,7 +9137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1214743204
@@ -9403,6 +9399,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231995709}
   m_CullTransparentMesh: 0
+--- !u!1 &1237523789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1237523790}
+  - component: {fileID: 1237523791}
+  m_Layer: 0
+  m_Name: IfFuncController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1237523790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237523789}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 177951036}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1237523791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237523789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6aa6f4da7cd76147b367589a2fca846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slot: {fileID: 214293122}
 --- !u!1 &1275208271
 GameObject:
   m_ObjectHideFlags: 0
@@ -10222,7 +10262,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u0423 \u0432\u0430\u0441 \u043E\u0442\u043A\u0440\u044B\u0442\u043E \u043D\u043E\u0432\u043E\u0435
     \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \"\u0446\u0438\u043A\u043B\".\n\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435
-    \u0435\u0433\u043E \u0434\u043B\u044F \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F
+    \u0435\u0433\u043E \u0434\u043B\u044F \u043F\u043E\u0432\u0442\u043E\u0440\u043E\u0432
     \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0439\n"
 --- !u!222 &1368352041
 CanvasRenderer:
@@ -10352,7 +10392,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1428184242
@@ -10543,7 +10582,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1464505474
@@ -10981,8 +11019,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 957.3, y: 550.12}
-  m_SizeDelta: {x: -725.661, y: -276.96387}
+  m_AnchoredPosition: {x: 957.3, y: 577.1}
+  m_SizeDelta: {x: -725.661, y: -330.96973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1516289794
 MonoBehaviour:
@@ -11452,7 +11490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1661290468
@@ -11614,7 +11651,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1683366508
@@ -12001,6 +12037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 1661290463}
 --- !u!114 &1723569860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12932,7 +12969,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1097431815
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 8093661325f32394cbf0e7b38ecb9233, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -13258,7 +13295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1947749575
@@ -13661,7 +13697,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1971949576
@@ -14457,7 +14492,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 1704351456}
-  LightCon: {fileID: 278802149}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &2027042189
@@ -14693,7 +14727,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2059829942}
   - component: {fileID: 2059829943}
-  - component: {fileID: 2059829944}
   m_Layer: 0
   m_Name: SlotController
   m_TagString: Untagged
@@ -14731,19 +14764,6 @@ MonoBehaviour:
   isCondition: 0
   isFunc: 0
   _slot: {fileID: 214293122}
---- !u!114 &2059829944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059829941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6aa6f4da7cd76147b367589a2fca846, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slot: {fileID: 214293122}
 --- !u!1 &2069282689
 GameObject:
   m_ObjectHideFlags: 0
@@ -15356,7 +15376,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1097431815
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4ca031a26eeada643ab5b1aabf3443a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

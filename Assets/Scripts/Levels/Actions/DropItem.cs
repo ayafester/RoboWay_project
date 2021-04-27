@@ -6,8 +6,9 @@ using System.Collections.Generic;
 
 public class DropItem : MonoBehaviour, IDropHandler
 {
+    public static bool isConditionActiv;
+
     public GameObject Condition;
-    public GameObject LightCon;
     DragItem item;
     public GameObject Slot;
    
@@ -17,21 +18,33 @@ public class DropItem : MonoBehaviour, IDropHandler
     private DropItem thisSlot;
     private int childCount;
     public static int isIfWas;
-    
-    public void OnDrop(PointerEventData eventData)
-    {
-        
-        thisSlot = this;
-        childCount = thisSlot.transform.childCount;
 
+    public static int thisNumber;
+    private void Start()
+    {
+        isConditionActiv = false;
         for (int i = 0; i < Slot.transform.childCount; i++)
         {
             slotsList.Add(Slot.transform.GetChild(i));
         }
         
-        item = DragItem.dragItem;
-        childCount = thisSlot.transform.childCount; //получаем количество детей у объекта
+    }
+    public void OnDrop(PointerEventData eventData)
+    {
         
+        thisSlot = this;
+        childCount = thisSlot.transform.childCount;
+        item = DragItem.dragItem;
+
+        for (int i = 0; i < Slot.transform.childCount; i++)
+        {
+            if(thisSlot.gameObject == slotsList[i].gameObject)
+            {
+                thisNumber = i;
+                Debug.Log(thisNumber);
+                break;
+            }
+        }
         if(situation == 2) // в случае с работой со слотами и с действиями
         {
             if (item != null)
@@ -46,6 +59,9 @@ public class DropItem : MonoBehaviour, IDropHandler
                             {
                                 item.SetItemToSlot(transform);
                                 SetColor();
+                            } else
+                            {
+                                Destroy(item.gameObject);
                             }
 
                         } else if (item.tag == "func") {
@@ -54,6 +70,10 @@ public class DropItem : MonoBehaviour, IDropHandler
                             {
                                 item.SetItemToSlot(transform);
                                 SetColotFunc();
+                            }
+                            else
+                            {
+                                Destroy(item.gameObject);
                             }
                         }
                         else
@@ -72,6 +92,9 @@ public class DropItem : MonoBehaviour, IDropHandler
                                     Destroy(thisSlot.transform.GetChild(1).gameObject);
                                     item.SetItemToSlot(transform);
                                     SetColor();
+                                } else
+                                {
+                                    Destroy(item.gameObject);
                                 }
                             } else if(item.tag == "func")
                             {
@@ -80,23 +103,31 @@ public class DropItem : MonoBehaviour, IDropHandler
                                     Destroy(thisSlot.transform.GetChild(1).gameObject);
                                     item.SetItemToSlot(transform);
                                     SetColotFunc();
+                                } else
+                                {
+                                    Destroy(item.gameObject);
                                 }
                             }
                             
                         } else
                         {
-                            Destroy(thisSlot.transform.GetChild(1).gameObject);
-                            item.SetItemToSlot(transform);
+                            Debug.Log("уничтожена старая");
+                            
                             if (thisSlot.transform.GetChild(1).gameObject.tag == "if")
                             {
                                 DeleteColor();
                                 ActionIfFuncController.isIfActiv = false;
+                                Debug.Log("aaa");
+
                             }
                             if (thisSlot.transform.GetChild(1).gameObject.tag == "func")
                             {
                                 DeletColorFunc();
                                 ActionIfFuncController.isIfActiv = false;
+                                Debug.Log("уууу" + ActionIfFuncController.isIfActiv);
                             }
+                            Destroy(thisSlot.transform.GetChild(1).gameObject);
+                            item.SetItemToSlot(transform);
                         }
                     }
                 } 
@@ -117,21 +148,9 @@ public class DropItem : MonoBehaviour, IDropHandler
             } 
         }
     }
-    private void Update()
-    {
-        
-        /*
-        for (int i = 0; i < slotsList.Count; i++)
-        {
-            if (slotsList[i].GetChild(1).tag == "if" || slotsList[i].GetChild(1).tag == "func")
-            {
-                isIfWas = 1;
-                break;
-            }
-        }*/
-    }
     private void SetColotFunc()
     {
+        isConditionActiv = true;
         Condition.GetComponent<CanvasGroup>().alpha = 1f;
         Condition.transform.GetChild(1).transform.GetComponent<Button>().interactable = true;
         for (int i = 0; i < Condition.transform.GetChild(2).childCount; i++)
@@ -143,6 +162,7 @@ public class DropItem : MonoBehaviour, IDropHandler
 
     public void DeletColorFunc() 
     {
+        isConditionActiv = false;
         Condition.GetComponent<CanvasGroup>().alpha = 0.4f;
         Condition.transform.GetChild(1).transform.GetComponent<Button>().interactable = false;
        
@@ -158,34 +178,24 @@ public class DropItem : MonoBehaviour, IDropHandler
     }
     private void SetColor()
     {
-        
-        LightCon.SetActive(true);
+        isConditionActiv = true;
         Move.isIfActive = true;
 
         Condition.GetComponent<CanvasGroup>().alpha = 1f;
         
         for (int i = 0; i < Condition.transform.GetChild(4).childCount; i++)
         {
-            if(ConditionEnabled.isActiveCondition)
-            {
-                Condition.transform.GetChild(4).transform.GetChild(i).GetComponent<DropItem>().enabled = true;
-            }
-            
+            Condition.transform.GetChild(4).transform.GetChild(i).GetComponent<DropItem>().enabled = true;
         }
         for (int i = 0; i < Condition.transform.GetChild(5).childCount; i++)
         {
-            if(ConditionEnabled.isActiveCondition)
-            {
-                Condition.transform.GetChild(5).transform.GetChild(i).GetComponent<DropItem>().enabled = true;
-            }
-            
+            Condition.transform.GetChild(5).transform.GetChild(i).GetComponent<DropItem>().enabled = true;
         }
     }
 
     public void DeleteColor()
     {
-        ConditionEnabled.isActiveCondition = false;
-        LightCon.SetActive(false);
+        isConditionActiv = false;
         Move.isIfActive = false;
         Condition.GetComponent<CanvasGroup>().alpha = 0.4f;
         
