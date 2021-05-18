@@ -5,3 +5,5 @@
 
 Использована музыка из Asset Store: Free Music Tracks For Games.
 Графика нарисована собственноручно.
+
+![Иллюстрация к проекту](https://github.com/ayaoftheshire/img/blob/main/Screenshot_1.png)
