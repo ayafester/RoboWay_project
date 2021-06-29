@@ -16,11 +16,9 @@ public class BlockController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        button2.interactable = true;
-        button3.interactable = true;
+        
 
         block2 = PlayerPrefs.GetInt("Block2");
-        Debug.Log(block2);
         block3 = PlayerPrefs.GetInt("Block3");
 
         if(block2 != 0)
@@ -31,5 +29,7 @@ public class BlockController : MonoBehaviour
         {
             button3.interactable = true;
         }
+
+        Debug.Log(block3);
     }
 }

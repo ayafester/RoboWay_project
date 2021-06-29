@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &14357737
@@ -277,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!114 &31228064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!114 &168197478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1337,7 +1338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &290896113
@@ -1534,6 +1534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!114 &333771844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,6 +1622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!114 &336032091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1709,6 +1711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!114 &376396009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1895,7 +1898,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1097431815
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 31eb834a1e68e6545833e0ebb4a7ee12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1927,7 +1930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &408182249
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1945,7 +1948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -330, y: -34}
+  m_AnchoredPosition: {x: -208, y: 311}
   m_SizeDelta: {x: 117, y: 117}
   m_Pivot: {x: 0.5, y: 0.57475036}
 --- !u!114 &408182250
@@ -1961,7 +1964,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &408182251
@@ -2168,7 +2170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &500799212
@@ -2257,7 +2258,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -208, y: 319.41653}
+  m_AnchoredPosition: {x: -203, y: 69.011}
   m_SizeDelta: {x: 117, y: 117}
   m_Pivot: {x: 0.5, y: 0.57475036}
 --- !u!114 &510766480
@@ -2273,7 +2274,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &510766481
@@ -2885,7 +2885,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &639192938
@@ -3781,7 +3780,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &881418904
@@ -3887,7 +3885,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1097431815
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2be1a63ff406f9440baf2a39d2961554, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4973,7 +4971,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1214743204
@@ -5528,7 +5525,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1428184242
@@ -5645,7 +5641,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1464505474
@@ -6115,7 +6110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1661290468
@@ -6183,7 +6177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1683366508
@@ -6435,6 +6428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40595c85cd0bf3c4680a669ad184de85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slot: {fileID: 0}
 --- !u!114 &1723569860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7041,7 +7035,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1097431815
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: b3cc74257775a4545a03021a72eca1dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7293,7 +7287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1947749575
@@ -7398,7 +7391,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Condition: {fileID: 0}
-  LightCon: {fileID: 0}
   Slot: {fileID: 214293122}
   situation: 2
 --- !u!114 &1971949576
@@ -8644,7 +8636,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1097431815
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4ca031a26eeada643ab5b1aabf3443a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
