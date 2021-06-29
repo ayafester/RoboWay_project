@@ -299,7 +299,7 @@ public class LevelsController : MonoBehaviour
                 {
                     level6B.GetComponent<Image>().color = new Color(255 / 255.0f, 103 / 255.0f, 102 / 255.0f, 255 / 255.0f);
                 }
-                PlayerPrefs.GetInt("Block3", 1);
+                PlayerPrefs.SetInt("Block3", 1);
             }
         } else if(block == 3)
         {

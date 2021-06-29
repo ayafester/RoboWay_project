@@ -131,6 +131,7 @@ public class Move : MonoBehaviour
         blockPanel.SetActive(true);
         if(isIfActive) //когда работаем с ифом
         {
+            
             if (level == 1)
             {
                 Debug.Log("if" + level);
@@ -138,7 +139,7 @@ public class Move : MonoBehaviour
             } else if (level == 2)
             {
                 Debug.Log("if"  + level);
-                Invoke("checkDetail", _speedOfMove + 4);
+                Invoke("checkDetail", _speedOfMove + 3);
             } else if (level == 3)
             {
                 Debug.Log("if" + level);
@@ -163,8 +164,8 @@ public class Move : MonoBehaviour
                 Invoke("checkDetail", _speedOfMove + 1);
             } else if(block == 3)
             {
-                Debug.Log("Это 3 блок");
-                Invoke("checkDetail", _speedOfMove - 2);
+                Debug.Log("Это 3 блок" + level);
+                Invoke("checkDetail", _speedOfMove + 1);
             }
             
         }
